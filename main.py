@@ -10,12 +10,14 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, cur
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from flask_gravatar import Gravatar
 from functools import wraps
-from typing import List
 import os
+from dotenv.main import load_dotenv
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ['MY_VARIABLE']
+load_dotenv()
+print(os.environ['SECRET_KEY'])
+app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 ckeditor = CKEditor(app)
 Bootstrap(app)
 login_manager = LoginManager()
@@ -249,17 +251,3 @@ def delete_post(post_id):
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-# TITLE
-# The Life of Cactus
-# SUBTITLE
-# Who knew that cacti lived such interesting lives.
-# October 20, 2020,
-# BODY
-# <p>Nori grape silver beet broccoli kombu beet greens fava bean potato quandong celery.</p>
-#
-# <p>Bunya nuts black-eyed pea prairie turnip leek lentil turnip greens parsnip.</p>
-#
-# <p>Sea lettuce lettuce water chestnut eggplant winter purslane fennel azuki bean earthnut pea sierra leone bologi leek soko chicory celtuce parsley j&iacute;cama salsify.</p>
-# IMAGE
-# https://images.unsplash.com/photo-1530482054429-cc491f61333b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80
