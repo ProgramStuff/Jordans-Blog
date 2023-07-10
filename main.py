@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, flash, abort, jsonify
+from flask import Flask, render_template, redirect, url_for, flash, abort, jsonify, request
 from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
 from datetime import date
@@ -16,12 +16,12 @@ from dotenv.main import load_dotenv
 
 app = Flask(__name__)
 load_dotenv()
-print(os.environ['SECRET_KEY'])
 app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 ckeditor = CKEditor(app)
 Bootstrap(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
+
 
 # GRAVATAR IMAGES
 gravatar = Gravatar(app,
@@ -192,7 +192,7 @@ def about():
     return render_template("about.html")
 
 
-@app.route("/contact", )
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
     return render_template("contact.html")
 
