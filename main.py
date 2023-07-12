@@ -35,7 +35,10 @@ gravatar = Gravatar(app,
 
 
 # CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'
+try:
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+except:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -78,8 +81,8 @@ class Comment(db.Model):
 
 
 
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+#     db.create_all()
 
 
 def admin_only(f):
