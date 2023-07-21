@@ -79,8 +79,6 @@ class Comment(db.Model):
     user_id = db.Column('user_id', db.Integer, db.ForeignKey('users.id'), nullable=False)
     blog_id = db.Column('blog_id', db.Integer, db.ForeignKey('blog_posts.id'), nullable=False)
 
-
-
 # with app.app_context():
 #     db.create_all()
 
